@@ -1,0 +1,320 @@
+# =================================================================
+# GUN WiFi Tool - Enhanced Requirements File
+# Professional WiFi Penetration Testing Suite
+# Author: GUN Community
+# Version: 3.0 - Enhanced Installation Support
+# =================================================================
+
+# =================================================================
+# CRITICAL CORE DEPENDENCIES (Required for basic functionality)
+# =================================================================
+
+# Network Protocol Analysis
+scapy>=2.4.4
+
+# Web Framework for Captive Portal
+flask>=2.0.0
+werkzeug>=2.0.0
+
+# QR Code Generation (Fixed installation)
+# Note: Use system package for better compatibility
+qrcode>=7.3.1
+pillow>=8.3.2
+
+# HTTP Requests
+requests>=2.26.0
+
+# =================================================================
+# NETWORK & SECURITY LIBRARIES
+# =================================================================
+
+# Cryptographic Operations
+pycryptodome>=3.15.0
+cryptography>=3.4.8
+
+# Network Address Manipulation
+netaddr>=0.8.0
+
+# System Process Management
+psutil>=5.8.0
+
+# Network Interface Management
+netifaces>=0.11.0
+
+# IPTables Integration (Optional - may need system package)
+# python-iptables>=1.0.0
+
+# =================================================================
+# USER INTERFACE & UTILITIES
+# =================================================================
+
+# Terminal Colors
+colorama>=0.4.4
+
+# Progress Bars
+tqdm>=4.62.0
+
+# JSON Web Tokens (for advanced features)
+pyjwt>=2.4.0
+
+# =================================================================
+# ENHANCED FEATURES (Optional but recommended)
+# =================================================================
+
+# Data Analysis and Visualization
+matplotlib>=3.5.0
+numpy>=1.21.0
+pandas>=1.3.0
+
+# Advanced Networking
+python-nmap>=0.7.1
+
+# MAC Address Manipulation
+netaddr>=0.8.0
+
+# =================================================================
+# DEVELOPMENT & TESTING TOOLS (Optional)
+# =================================================================
+
+# Testing Framework
+pytest>=6.2.5
+pytest-mock>=3.6.1
+
+# Code Formatting
+black>=21.9b0
+
+# Code Linting
+flake8>=4.0.0
+
+# Coverage Testing
+coverage>=6.0
+
+# =================================================================
+# ALTERNATIVE PACKAGES FOR COMPATIBILITY
+# =================================================================
+
+# Alternative QR Code library if main one fails
+# qrcode-terminal>=0.8
+
+# Alternative cryptography if pycryptodome fails
+# pycrypto>=2.6.1
+
+# Alternative networking if scapy fails
+# pyshark>=0.4.3
+
+# =================================================================
+# COMPREHENSIVE INSTALLATION GUIDE FOR ALL LINUX DISTRIBUTIONS
+# =================================================================
+
+# =================================================================
+# METHOD 1: AUTOMATIC INSTALLATION (Recommended)
+# =================================================================
+
+# Run this complete command (copy-paste entire line):
+# curl -fsSL https://raw.githubusercontent.com/your-repo/gun-wifi-tool/main/install.sh | bash
+
+# =================================================================
+# METHOD 2: MANUAL INSTALLATION STEPS
+# =================================================================
+
+# STEP 1: Update System
+sudo apt update && sudo apt upgrade -y
+
+# STEP 2: Install System Dependencies (Ubuntu/Debian/Kali)
+sudo apt install -y \
+    aircrack-ng \
+    hostapd \
+    dnsmasq \
+    iptables \
+    wireless-tools \
+    iw \
+    net-tools \
+    python3 \
+    python3-pip \
+    python3-venv \
+    python3-dev \
+    python3-setuptools \
+    build-essential \
+    libffi-dev \
+    libssl-dev
+
+# STEP 3: Install QR Code System Package (Fixes qrcode issues)
+sudo apt install -y python3-qrcode python3-pil
+
+# STEP 4: Create Virtual Environment (Recommended)
+python3 -m venv gun_wifi_env
+source gun_wifi_env/bin/activate
+
+# STEP 5: Upgrade pip
+pip install --upgrade pip setuptools wheel
+
+# STEP 6: Install Python Dependencies
+pip install -r requirements.txt
+
+# =================================================================
+# METHOD 3: DISTRIBUTION-SPECIFIC COMMANDS
+# =================================================================
+
+# ┌─ UBUNTU/DEBIAN/KALI LINUX ─────────────────────────────────────┐
+sudo apt update
+sudo apt install -y aircrack-ng hostapd dnsmasq iptables wireless-tools iw python3-pip python3-qrcode
+pip3 install scapy flask pillow requests pycryptodome netaddr psutil netifaces colorama tqdm cryptography
+
+# ┌─ CENTOS/RHEL/FEDORA ───────────────────────────────────────────┐
+sudo dnf update -y
+sudo dnf install -y aircrack-ng hostapd dnsmasq iptables wireless-tools iw python3-pip
+pip3 install scapy flask qrcode pillow requests pycryptodome netaddr psutil netifaces colorama tqdm cryptography
+
+# ┌─ ARCH LINUX ───────────────────────────────────────────────────┐
+sudo pacman -Syu
+sudo pacman -S aircrack-ng hostapd dnsmasq iptables wireless_tools iw python-pip
+pip install scapy flask qrcode pillow requests pycryptodome netaddr psutil netifaces colorama tqdm cryptography
+
+# ┌─ OPENSUSE ─────────────────────────────────────────────────────┐
+sudo zypper update
+sudo zypper install aircrack-ng hostapd dnsmasq iptables wireless-tools iw python3-pip
+pip3 install scapy flask qrcode pillow requests pycryptodome netaddr psutil netifaces colorama tqdm cryptography
+
+# =================================================================
+# METHOD 4: DOCKER INSTALLATION (Isolated Environment)
+# =================================================================
+
+# Create Dockerfile:
+cat > Dockerfile << 'EOF'
+FROM kalilinux/kali-rolling
+RUN apt update && apt install -y \
+    aircrack-ng hostapd dnsmasq iptables wireless-tools iw \
+    python3 python3-pip python3-qrcode \
+    && pip3 install scapy flask pillow requests pycryptodome netaddr psutil netifaces colorama tqdm cryptography
+WORKDIR /app
+COPY . .
+CMD ["python3", "gun_wifi_tool.py"]
+EOF
+
+# Build and run:
+docker build -t gun-wifi-tool .
+docker run --privileged --net=host gun-wifi-tool
+
+# =================================================================
+# TROUBLESHOOTING COMMON INSTALLATION ISSUES
+# =================================================================
+
+# ┌─ Issue: qrcode installation fails ─────────────────────────────┐
+# Solution 1: Use system package
+sudo apt install python3-qrcode python3-pil
+
+# Solution 2: Install with specific flags
+pip install qrcode[pil] --no-cache-dir --force-reinstall
+
+# Solution 3: Install dependencies separately
+pip install pillow
+pip install qrcode
+
+# ┌─ Issue: scapy permission errors ───────────────────────────────┐
+# Solution: Install with user flag or use virtual environment
+pip install --user scapy
+# OR
+python3 -m venv venv && source venv/bin/activate && pip install scapy
+
+# ┌─ Issue: python-iptables fails ─────────────────────────────────┐
+# Solution: Install system dependencies first
+sudo apt install iptables-dev netfilter-queue-dev libnetfilter-queue-dev
+pip install python-iptables
+
+# ┌─ Issue: aircrack-ng not found ─────────────────────────────────┐
+# Solution: Install from different sources
+sudo apt install aircrack-ng --fix-missing
+# OR compile from source:
+wget https://download.aircrack-ng.org/aircrack-ng-1.7.tar.gz
+tar -xzf aircrack-ng-1.7.tar.gz
+cd aircrack-ng-1.7 && make && sudo make install
+
+# ┌─ Issue: externally-managed-environment ────────────────────────┐
+# Solution 1: Use virtual environment
+python3 -m venv gun_wifi_env
+source gun_wifi_env/bin/activate
+pip install -r requirements.txt
+
+# Solution 2: Use --break-system-packages (NOT RECOMMENDED)
+pip install --break-system-packages -r requirements.txt
+
+# Solution 3: Use system packages when possible
+sudo apt install python3-scapy python3-flask python3-requests
+
+# =================================================================
+# VERIFICATION COMMANDS
+# =================================================================
+
+# Check if all tools are installed:
+echo "Checking system tools..."
+which aircrack-ng && echo "✓ aircrack-ng installed" || echo "✗ aircrack-ng missing"
+which hostapd && echo "✓ hostapd installed" || echo "✗ hostapd missing"
+which dnsmasq && echo "✓ dnsmasq installed" || echo "✗ dnsmasq missing"
+
+# Check Python packages:
+echo "Checking Python packages..."
+python3 -c "import scapy; print('✓ scapy installed')" 2>/dev/null || echo "✗ scapy missing"
+python3 -c "import flask; print('✓ flask installed')" 2>/dev/null || echo "✗ flask missing"
+python3 -c "import qrcode; print('✓ qrcode installed')" 2>/dev/null || echo "✗ qrcode missing"
+
+# Run the tool's dependency checker:
+python3 gun_wifi_tool.py --help
+
+# =================================================================
+# ALTERNATIVE INSTALLATION METHODS FOR SPECIFIC ISSUES
+# =================================================================
+
+# ┌─ If pip install fails completely ──────────────────────────────┐
+# Use conda instead:
+conda install -c conda-forge scapy flask pillow requests
+
+# ┌─ If wireless tools are not available ──────────────────────────┐
+# Build from source:
+git clone https://github.com/aircrack-ng/aircrack-ng.git
+cd aircrack-ng
+autoreconf -i
+./configure --with-experimental
+make
+sudo make install
+
+# ┌─ For older Ubuntu/Debian versions ─────────────────────────────┐
+# Add backports repository:
+echo "deb http://deb.debian.org/debian bullseye-backports main" | sudo tee -a /etc/apt/sources.list
+sudo apt update
+sudo apt -t bullseye-backports install aircrack-ng
+
+# =================================================================
+# PERFORMANCE OPTIMIZATION
+# =================================================================
+
+# Install performance packages:
+pip install cython
+pip install --upgrade scapy[complete]
+
+# Compile Python packages for better performance:
+python3 -m compileall gun_wifi_tool.py
+
+# =================================================================
+# SECURITY HARDENING
+# =================================================================
+
+# Set proper permissions:
+chmod +x gun_wifi_tool.py
+chmod 644 requirements.txt
+
+# Create dedicated user (optional):
+sudo useradd -r -s /bin/false gunwifi
+sudo chown gunwifi:gunwifi gun_wifi_tool.py
+
+# =================================================================
+# ONE-LINE INSTALLATION COMMANDS FOR COPY-PASTE
+# =================================================================
+
+# ┌─ Complete Ubuntu/Debian/Kali Installation ────────────────────┐
+sudo apt update && sudo apt install -y aircrack-ng hostapd dnsmasq iptables wireless-tools iw python3-pip python3-qrcode python3-pil && pip3 install scapy flask requests pycryptodome netaddr psutil netifaces colorama tqdm cryptography && echo "✅ Installation complete!"
+
+# ┌─ Virtual Environment Installation ─────────────────────────────┐
+python3 -m venv gun_wifi_env && source gun_wifi_env/bin/activate && pip install --upgrade pip && pip install scapy flask qrcode pillow requests pycryptodome netaddr psutil netifaces colorama tqdm cryptography && echo "✅ Virtual environment setup complete!"
+
+# ┌─ System Package Installation (Safer) ─────────────────────────┐
+sudo apt update && sudo apt install -y aircrack-ng hostapd dnsmasq iptables wireless-tools iw python3-scapy python3-flask python3-requests python3-qrcode python3-pil python3-psutil && echo "✅ System packages installed!"

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page - File Connections</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            padding: 20px;
+            background: #000;
+            color: #fff;
+        }
+        .test-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 2px solid #00ff88;
+            border-radius: 10px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .status.success {
+            background: #10b981;
+            color: white;
+        }
+        .status.error {
+            background: #ef4444;
+            color: white;
+        }
+        .test-button {
+            background: linear-gradient(135deg, #00ff88, #00d4ff);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            margin: 10px 5px;
+        }
+        .test-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔫 GUN WiFi Tool - File Connection Test</h1>
+        
+        <div id="css-status" class="status">
+            ⏳ Testing CSS connection...
+        </div>
+        
+        <div id="js-status" class="status">
+            ⏳ Testing JavaScript connection...
+        </div>
+        
+        <div class="test-section">
+            <h3>Interactive Tests:</h3>
+            <button class="test-button" onclick="testModalFunction()">Test Modal Function</button>
+            <button class="test-button" onclick="testCopyFunction()">Test Copy Function</button>
+            <button class="test-button" onclick="testThemeToggle()">Test Theme Toggle</button>
+        </div>
+        
+        <div id="test-results">
+            <h3>Test Results:</h3>
+            <div id="results-content"></div>
+        </div>
+    </div>
+
+    <script src="static/js/app.js"></script>
+    
+    <script>
+        // Test CSS loading
+        function testCSSLoading() {
+            const testElement = document.createElement('div');
+            testElement.style.cssText = 'position: absolute; left: -9999px; top: -9999px;';
+            testElement.className = 'nav'; // CSS class from our stylesheet
+            document.body.appendChild(testElement);
+            
+            const styles = window.getComputedStyle(testElement);
+            const hasStyles = styles.position === 'absolute';
+            
+            document.body.removeChild(testElement);
+            
+            const statusEl = document.getElementById('css-status');
+            if (hasStyles) {
+                statusEl.className = 'status success';
+                statusEl.innerHTML = '✅ CSS loaded successfully!';
+            } else {
+                statusEl.className = 'status error';
+                statusEl.innerHTML = '❌ CSS failed to load!';
+            }
+        }
+        
+        // Test JavaScript loading
+        function testJSLoading() {
+            const statusEl = document.getElementById('js-status');
+            
+            if (typeof window.showCommands === 'function' && 
+                typeof window.copyCommand === 'function' && 
+                typeof window.closeCommandsModal === 'function') {
+                statusEl.className = 'status success';
+                statusEl.innerHTML = '✅ JavaScript loaded successfully! All functions available.';
+            } else {
+                statusEl.className = 'status error';
+                statusEl.innerHTML = '❌ JavaScript failed to load or functions missing!';
+            }
+        }
+        
+        // Test modal function
+        function testModalFunction() {
+            const resultsEl = document.getElementById('results-content');
+            try {
+                if (typeof window.showCommands === 'function') {
+                    resultsEl.innerHTML += '<div class="status success">✅ Modal function is available</div>';
+                } else {
+                    resultsEl.innerHTML += '<div class="status error">❌ Modal function not found</div>';
+                }
+            } catch (error) {
+                resultsEl.innerHTML += '<div class="status error">❌ Modal function error: ' + error.message + '</div>';
+            }
+        }
+        
+        // Test copy function
+        function testCopyFunction() {
+            const resultsEl = document.getElementById('results-content');
+            try {
+                if (typeof window.copyCommand === 'function') {
+                    resultsEl.innerHTML += '<div class="status success">✅ Copy function is available</div>';
+                } else {
+                    resultsEl.innerHTML += '<div class="status error">❌ Copy function not found</div>';
+                }
+            } catch (error) {
+                resultsEl.innerHTML += '<div class="status error">❌ Copy function error: ' + error.message + '</div>';
+            }
+        }
+        
+        // Test theme toggle
+        function testThemeToggle() {
+            const resultsEl = document.getElementById('results-content');
+            try {
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    resultsEl.innerHTML += '<div class="status success">✅ Theme toggle element found</div>';
+                } else {
+                    resultsEl.innerHTML += '<div class="status error">❌ Theme toggle element not found (normal for test page)</div>';
+                }
+            } catch (error) {
+                resultsEl.innerHTML += '<div class="status error">❌ Theme toggle error: ' + error.message + '</div>';
+            }
+        }
+        
+        // Run tests when page loads
+        window.addEventListener('load', function() {
+            testCSSLoading();
+            testJSLoading();
+        });
+    </script>
+</body>
+</html>

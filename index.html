@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GUN WiFi Tool - Advanced WiFi Penetration Testing Suite | Ethical Hacking Tool</title>
+    <meta name="description" content="Professional WiFi penetration testing tool for ethical hackers. Features deauthentication attacks, evil twin APs, captive portals, DHCP flooding, and comprehensive wireless security assessment.">
+    <meta name="keywords" content="wifi penetration testing, ethical hacking, deauth attack, evil twin, captive portal, wireless security, kali linux, cybersecurity tools">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body data-theme="dark">
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav__container">
+            <div class="nav__brand">
+                <div class="nav__logo">
+                    <svg width="32" height="32" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="gunGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.3)"/>
+                            </filter>
+                        </defs>
+                        <circle cx="60" cy="60" r="55" fill="url(#gunGradient)" filter="url(#shadow)"/>
+                        <circle cx="60" cy="60" r="45" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                        <g transform="translate(60,60)" fill="none" stroke="white" stroke-width="3" stroke-linecap="round">
+                            <path d="M -15,-10 Q 0,-20 15,-10" stroke-width="2" opacity="0.9"/>
+                            <path d="M -25,-5 Q 0,-30 25,-5" stroke-width="2.5" opacity="0.7"/>
+                            <path d="M -35,0 Q 0,-40 35,0" stroke-width="3" opacity="0.5"/>
+                        </g>
+                        <g transform="translate(60,60)">
+                            <path d="M 0,-15 L 8,-10 L 8,10 L 0,18 L -8,10 L -8,-10 Z" fill="white" opacity="0.9" stroke="rgba(0,255,136,0.8)" stroke-width="1"/>
+                            <rect x="-3" y="-2" width="6" height="8" rx="1" fill="#00ff88"/>
+                            <circle cx="0" cy="-6" r="3" fill="none" stroke="#00ff88" stroke-width="1.5"/>
+                        </g>
+                    </svg>
+                </div>
+                <span class="nav__title">GUN Community</span>
+            </div>
+            <ul class="nav__menu" id="nav-menu">
+                <li><a href="#features" class="nav__link">Features</a></li>
+                <li><a href="#installation" class="nav__link">Installation</a></li>
+                <li><a href="#docs" class="nav__link">Docs</a></li>
+                <li><a href="https://github.com/teotiaabhi/gun-wifi-tool" target="_blank" class="nav__link">GitHub</a></li>
+                <li><a href="#download" class="nav__link nav__link--cta">Download</a></li>
+            </ul>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-toggle__icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero__container">
+            <div class="hero__content">
+                <h1 class="hero__title">
+                    GUN WiFi Tool
+                    <span class="hero__subtitle">Advanced WiFi Penetration Testing Suite</span>
+                </h1>
+                <p class="hero__description">
+                    Professional-grade WiFi penetration testing suite for security researchers and ethical hackers. 
+                    Comprehensive wireless security assessment with advanced attack vectors, multi-skin captive portals, 
+                    and sophisticated evasion techniques for enterprise security testing.
+                </p>
+                <div class="hero__actions">
+                    <a href="#download" class="btn btn--primary btn--large">Download Now</a>
+                    <a href="#docs" class="btn btn--outline btn--large">View Documentation</a>
+                </div>
+            </div>
+            <div class="hero__terminal">
+                <div class="terminal">
+                    <div class="terminal__header">
+                        <div class="terminal__controls">
+                            <span class="terminal__dot terminal__dot--red"></span>
+                            <span class="terminal__dot terminal__dot--yellow"></span>
+                            <span class="terminal__dot terminal__dot--green"></span>
+                        </div>
+                        <div class="terminal__title">gunwifi-terminal</div>
+                    </div>
+                    <div class="terminal__body">
+                        <div class="terminal__content" id="terminal-content"></div>
+                        <div class="terminal__cursor"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Advanced Security Capabilities</h2>
+                <p class="section__description">
+                    Professional-grade tools designed for comprehensive wireless security assessment
+                </p>
+            </div>
+            <div class="features__grid">
+                <div class="feature-card">
+                    <div class="feature-card__icon">🔍</div>
+                    <h3 class="feature-card__title">Advanced Deauth Attacks</h3>
+                    <p class="feature-card__description">
+                        Sophisticated deauthentication attacks with packet injection and client targeting
+                    </p>
+                    <ul class="feature-card__list">
+                        <li>Precision client targeting</li>
+                        <li>MAC address randomization</li>
+                        <li>Stealth mode evasion</li>
+                    </ul>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-card__icon">🛡️</div>
+                    <h3 class="feature-card__title">Evil Twin & Captive Portals</h3>
+                    <p class="feature-card__description">
+                        Deploy convincing fake access points with multi-skin captive portal themes
+                    </p>
+                    <ul class="feature-card__list">
+                        <li>Google, Facebook, Apple skins</li>
+                        <li>Device fingerprinting</li>
+                        <li>QR code WiFi traps</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">🤖</div>
+                    <h3 class="feature-card__title">DHCP & Beacon Flooding</h3>
+                    <p class="feature-card__description">
+                        Advanced network disruption with DHCP starvation and beacon flooding attacks
+                    </p>
+                    <ul class="feature-card__list">
+                        <li>DHCP pool exhaustion</li>
+                        <li>Multiple fake APs</li>
+                        <li>Real-time monitoring</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">📊</div>
+                    <h3 class="feature-card__title">Comprehensive Logging</h3>
+                    <p class="feature-card__description">
+                        Detailed local data storage with session management and credential capture
+                    </p>
+                    <ul class="feature-card__list">
+                        <li>Credential capture logs</li>
+                        <li>Device information</li>
+                        <li>Session tracking</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">🌐</div>
+                    <h3 class="feature-card__title">Multi-Protocol Support</h3>
+                    <p class="feature-card__description">
+                        Full compatibility with WEP, WPA, WPA2, WPA3, and enterprise authentication methods
+                    </p>
+                    <ul class="feature-card__list">
+                        <li>WPA3 SAE testing</li>
+                        <li>802.1X authentication</li>
+                        <li>Legacy protocol analysis</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-card__icon">⚡</div>
+                    <h3 class="feature-card__title">Real-time Monitoring</h3>
+                    <p class="feature-card__description">
+                        Continuous security monitoring with alert systems and dashboard analytics
+                    </p>
+                    <ul class="feature-card__list">
+                        <li>Live threat detection</li>
+                        <li>Anomaly alerts</li>
+                        <li>Performance metrics</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="installation" id="installation">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Quick Installation</h2>
+                <p class="section__description">
+                    Get started in minutes with our streamlined installation process
+                </p>
+            </div>
+            <div class="install-tabs">
+                <div class="install-tabs__nav">
+                    <button class="install-tab active" data-tab="linux">Installation</button>
+                    <button class="install-tab" data-tab="docker">Requirements</button>
+                    <button class="install-tab" data-tab="kali">Kali Linux</button>
+                </div>
+                <div class="install-tabs__content">
+                    <div class="install-panel active" id="linux">
+                        <div class="code-block">
+                            <div class="code-block__header">
+                                <span class="code-block__title">Linux Installation</span>
+                                <button class="code-block__copy" data-copy="linux-code">Copy</button>
+                            </div>
+                            <pre class="code-block__content" id="linux-code"># Clone the repository
+git clone https://github.com/teotiaabhi/gun-wifi-tool.git
+cd gun-wifi-tool
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the tool
+sudo python3 src/gun_wifi_tool.py --help</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="install-panel" id="docker">
+                        <div class="code-block">
+                            <div class="code-block__header">
+                                <span class="code-block__title">System Requirements</span>
+                                <button class="code-block__copy" data-copy="docker-code">Copy</button>
+                            </div>
+                            <pre class="code-block__content" id="docker-code"># Install system dependencies (Ubuntu/Debian)
+sudo apt update
+sudo apt install hostapd dnsmasq aircrack-ng
+
+# Install Python packages
+pip install scapy flask qrcode[pil]
+
+# Set WiFi adapter to monitor mode
+sudo airmon-ng start wlan0</pre>
+                        </div>
+                    </div>
+                    
+                    <div class="install-panel" id="kali">
+                        <div class="code-block">
+                            <div class="code-block__header">
+                                <span class="code-block__title">Kali Linux Installation</span>
+                                <button class="code-block__copy" data-copy="kali-code">Copy</button>
+                            </div>
+                            <pre class="code-block__content" id="kali-code"># Kali Linux has most tools pre-installed
+git clone https://github.com/teotiaabhi/gun-wifi-tool.git
+cd gun-wifi-tool
+
+# Install Python dependencies
+pip install -r requirements.txt
+
+# Ready to use!
+sudo python3 src/gun_wifi_tool.py --scan</pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Download Center</h2>
+                <p class="section__description">
+                    Choose your preferred distribution method
+                </p>
+            </div>
+            <div class="download__grid">
+                <div class="download-card">
+                    <div class="download-card__header">
+                        <div class="download-card__icon">📦</div>
+                        <h3 class="download-card__title">GitHub Repository</h3>
+                    </div>
+                    <div class="download-card__content">
+                        <p class="download-card__description">Latest source code with full documentation and examples</p>
+                        <div class="download-card__meta">
+                            <span class="meta__item">v3.0</span>
+                            <span class="meta__item">Open Source</span>
+                            <span class="meta__item">MIT License</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/teotiaabhi/gun-wifi-tool" target="_blank" class="btn btn--primary btn--full-width">View on GitHub</a>
+                </div>
+
+                <div class="download-card">
+                    <div class="download-card__header">
+                        <div class="download-card__icon">�</div>
+                        <h3 class="download-card__title">Quick Commands</h3>
+                    </div>
+                    <div class="download-card__content">
+                        <p class="download-card__description">Essential commands for WiFi penetration testing</p>
+                        <div class="download-card__meta">
+                            <span class="meta__item">Deauth</span>
+                            <span class="meta__item">Evil Twin</span>
+                            <span class="meta__item">DHCP Flood</span>
+                        </div>
+                    </div>
+                    <button class="btn btn--outline btn--full-width" onclick="showCommands()">View Commands</button>
+                </div>
+
+                <div class="download-card">
+                    <div class="download-card__header">
+                        <div class="download-card__icon">�</div>
+                        <h3 class="download-card__title">Documentation</h3>
+                    </div>
+                    <div class="download-card__content">
+                        <p class="download-card__description">Comprehensive guides and usage examples</p>
+                        <div class="download-card__meta">
+                            <span class="meta__item">Usage Guide</span>
+                            <span class="meta__item">Examples</span>
+                            <span class="meta__item">FAQ</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/teotiaabhi/gun-wifi-tool/blob/main/README.md" target="_blank" class="btn btn--secondary btn--full-width">Read Docs</a>
+                </div>
+            </div>
+            
+            <div class="security-notice">
+                <div class="security-notice__icon">⚠️</div>
+                <div class="security-notice__content">
+                    <h4>Security Notice</h4>
+                    <p>This tool is intended for authorized penetration testing only. Ensure you have proper authorization before testing any wireless networks. Unauthorized access to networks is illegal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section class="docs" id="docs">
+        <div class="container">
+            <div class="section__header">
+                <h2 class="section__title">Documentation & Resources</h2>
+                <p class="section__description">
+                    Comprehensive guides and API documentation for security professionals
+                </p>
+            </div>
+            <div class="docs__grid">
+                <div class="doc-card">
+                    <div class="doc-card__icon">📖</div>
+                    <h3 class="doc-card__title">User Guide</h3>
+                    <p class="doc-card__description">Complete user manual with examples and best practices</p>
+                    <a href="#" class="doc-card__link">Read Documentation →</a>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-card__icon">🔌</div>
+                    <h3 class="doc-card__title">API Reference</h3>
+                    <p class="doc-card__description">REST API documentation for integration and automation</p>
+                    <a href="#" class="doc-card__link">View API Docs →</a>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-card__icon">🎓</div>
+                    <h3 class="doc-card__title">Training Resources</h3>
+                    <p class="doc-card__description">Professional training materials and certification programs</p>
+                    <a href="#" class="doc-card__link">Access Training →</a>
+                </div>
+
+                <div class="doc-card">
+                    <div class="doc-card__icon">💬</div>
+                    <h3 class="doc-card__title">Community Support</h3>
+                    <p class="doc-card__description">Connect with security professionals and get expert help</p>
+                    <a href="#" class="doc-card__link">Join Community →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <div class="nav__logo">
+                            <svg width="32" height="32" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="gunGradientFooter" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#667eea;stop-opacity:1" />
+                                    </linearGradient>
+                                    <filter id="shadowFooter" x="-50%" y="-50%" width="200%" height="200%">
+                                        <feDropShadow dx="2" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.3)"/>
+                                    </filter>
+                                </defs>
+                                <circle cx="60" cy="60" r="55" fill="url(#gunGradientFooter)" filter="url(#shadowFooter)"/>
+                                <circle cx="60" cy="60" r="45" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                                <g transform="translate(60,60)" fill="none" stroke="white" stroke-width="3" stroke-linecap="round">
+                                    <path d="M -15,-10 Q 0,-20 15,-10" stroke-width="2" opacity="0.9"/>
+                                    <path d="M -25,-5 Q 0,-30 25,-5" stroke-width="2.5" opacity="0.7"/>
+                                    <path d="M -35,0 Q 0,-40 35,0" stroke-width="3" opacity="0.5"/>
+                                </g>
+                                <g transform="translate(60,60)">
+                                    <path d="M 0,-15 L 8,-10 L 8,10 L 0,18 L -8,10 L -8,-10 Z" fill="white" opacity="0.9" stroke="rgba(0,255,136,0.8)" stroke-width="1"/>
+                                    <rect x="-3" y="-2" width="6" height="8" rx="1" fill="#00ff88"/>
+                                    <circle cx="0" cy="-6" r="3" fill="none" stroke="#00ff88" stroke-width="1.5"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <span class="footer__title">GUN Community</span>
+                    </div>
+                    <p class="footer__description">
+                        A dedicated community providing advanced wireless attack tools and resources for red team professionals and ethical hackers worldwide.
+                    </p>
+                </div>
+                
+                <div class="footer__links">
+                    <div class="footer__section">
+                        <h4 class="footer__heading">Product</h4>
+                        <ul class="footer__list">
+                            <li><a href="#features">Features</a></li>
+                            <li><a href="#installation">Installation</a></li>
+                            <li><a href="#download">Download</a></li>
+                            <li><a href="#docs">Documentation</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer__section">
+                        <h4 class="footer__heading">Resources</h4>
+                        <ul class="footer__list">
+                            <li><a href="https://github.com/teotiaabhi/gun-wifi-tool/blob/main/README.md" target="_blank">Usage Guide</a></li>
+                            <li><a href="https://github.com/teotiaabhi/gun-wifi-tool/blob/main/USAGE.md" target="_blank">Examples</a></li>
+                            <li><a href="https://github.com/teotiaabhi/gun-wifi-tool/issues" target="_blank">Report Issues</a></li>
+                            <li><a href="https://github.com/teotiaabhi/gun-wifi-tool/blob/main/CHANGELOG.md" target="_blank">Changelog</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer__section">
+                        <h4 class="footer__heading">Legal & Ethics</h4>
+                        <ul class="footer__list">
+                            <li><a href="https://github.com/teotiaabhi/gun-wifi-tool/blob/main/LICENSE" target="_blank">MIT License</a></li>
+                            <li><a href="#">Ethical Use Policy</a></li>
+                            <li><a href="#">Security Guidelines</a></li>
+                            <li><a href="#">Responsible Disclosure</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer__section">
+                        <h4 class="footer__heading">Connect</h4>
+                        <ul class="footer__list">
+                            <li><a href="https://github.com/teotiaabhi/gun-wifi-tool" target="_blank">Repository</a></li>
+                            <li><a href="https://github.com/teotiaabhi" target="_blank">GitHub Profile</a></li>
+                            <li><a href="https://www.linkedin.com/in/abhishek-teotia-a49678321/" target="_blank">LinkedIn</a></li>
+                            <li><a href="#">Discord Community</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer__bottom">
+                <div class="footer__copyright">
+                    <p>&copy; 2025 GUN WiFi Tool. Open Source Project under MIT License.</p>
+                    <p class="footer__disclaimer">
+                        This tool is intended for authorized penetration testing and educational purposes only. Users must comply with applicable laws and obtain proper authorization before testing any networks.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Commands Modal -->
+    <div class="modal" id="commandsModal">
+        <div class="modal__backdrop" onclick="closeCommandsModal()"></div>
+        <div class="modal__content">
+            <div class="modal__header">
+                <h3 class="modal__title">GUN WiFi Tool Commands</h3>
+                <button class="modal__close" onclick="closeCommandsModal()">&times;</button>
+            </div>
+            <div class="modal__body">
+                <div class="command-section">
+                    <h4 class="command-section__title">Basic Commands</h4>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="scan-cmd">python3 gun_wifi_tool.py --scan</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('scan-cmd')">Copy</button>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="deauth-cmd">python3 gun_wifi_tool.py --deauth --target MAC_ADDRESS</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('deauth-cmd')">Copy</button>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="evil-twin-cmd">python3 gun_wifi_tool.py --evil-twin --ssid FAKE_SSID</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('evil-twin-cmd')">Copy</button>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="dhcp-flood-cmd">python3 gun_wifi_tool.py --dhcp-flood --interface wlan0</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('dhcp-flood-cmd')">Copy</button>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="beacon-flood-cmd">python3 gun_wifi_tool.py --beacon-flood --count 50</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('beacon-flood-cmd')">Copy</button>
+                    </div>
+                </div>
+                
+                <div class="command-section">
+                    <h4 class="command-section__title">Advanced Options</h4>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="captive-cmd">--captive-skin google|facebook|apple</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('captive-cmd')">Copy</button>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="qr-trap-cmd">--qr-trap (enable QR code WiFi traps)</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('qr-trap-cmd')">Copy</button>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="monitor-cmd">--monitor-mode (auto setup monitor interface)</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('monitor-cmd')">Copy</button>
+                    </div>
+                    <div class="command-item">
+                        <div class="command-item__code">
+                            <code id="stealth-cmd">--stealth-mode (MAC randomization)</code>
+                        </div>
+                        <button class="btn btn--copy" onclick="copyCommand('stealth-cmd')">Copy</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal__footer">
+                <p class="modal__note">⚠️ Ensure you have proper authorization before using these commands</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/js/app.js"></script>
+</body>
+</html>
